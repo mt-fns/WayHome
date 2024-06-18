@@ -10,14 +10,7 @@ function sendMessage(e) {
     input.focus()
 }
 
-function sendLocation(e) {
-
-}
-
-document.querySelector('#location')
-    .addEventListener('submit', sendLocation)
-
-document.querySelector('#room')
+document.querySelector('form')
     .addEventListener('submit', sendMessage)
 
 // Listen for messages 
