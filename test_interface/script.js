@@ -1,17 +1,26 @@
 const socket = io('ws://localhost:3000')
 
-function sendMessage(e) {
+function sendRoom(e) {
     e.preventDefault()
-    const input = document.querySelector('input')
+    const input = document.querySelector('#roomInput')
     if (input.value) {
-        socket.emit('message', input.value)
+        socket.emit('joinRoom', input.value)
         input.value = ""
     }
     input.focus()
 }
 
-document.querySelector('form')
-    .addEventListener('submit', sendMessage)
+function sendLocation() {
+    console.log('location');
+    navigator.geolocation.getCurrentPosition((position) => {
+        socket.emit('sendLocation', {latitude: position.coords.latitude, longitude: position.coords.longitude})
+    });
+}
+
+document.querySelector('#location').addEventListener('click', sendLocation)
+
+document.querySelector('#room')
+    .addEventListener('submit', sendRoom)
 
 // Listen for messages 
 socket.on("message", (data) => {
