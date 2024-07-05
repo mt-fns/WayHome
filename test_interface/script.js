@@ -13,7 +13,7 @@ function sendRoom(e) {
 function sendLocation() {
     console.log('location');
     navigator.geolocation.getCurrentPosition((position) => {
-        socket.emit('sendLocation', {latitude: position.coords.latitude, longitude: position.coords.longitude})
+        socket.emit('sendLocation', 'user1', {latitude: position.coords.latitude, longitude: position.coords.longitude})
     });
 }
 

@@ -17,15 +17,16 @@ io.on('connection', socket => {
     //     console.log(data);
     //     io.emit('message', `${data}`);
     // })
-
-    socket.on('joinRoom', ({userName, room}) => {
-        // const user = userJoin(socket.id, userName, room);
-        socket.join(room);
-        io.to(room).emit("message","TEST");
+    socket.on('sendLocation', (room, location) => {
+        console.log('sending', room, location);
+        io.to(room).emit('message', location);
     })
 
-    socket.on('sendLocation', ({test1, test2}) => {
-        console.log(test1, test2);
+    socket.on('joinRoom', (room) => {
+        // const user = userJoin(socket.id, userName, room);
+        console.log('joined', room);
+        socket.join(room);
+        // io.to(room).emit("message","TEST");
     })
 })
 
